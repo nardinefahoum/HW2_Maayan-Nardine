@@ -159,6 +159,23 @@ plt.plot(np.arange(gd.i+1),gd.loss)
 plt.xlabel("num_iteration")
 plt.ylabel("loss")
 
+#  for each alpha, learning rate plot the MSE with respect to number of iterations.
+
+learning_rate=np.arange(0.001,0.4,0.05)
+#score(self, X, Y)
+loc=0
+plt.figure(figsize=(30, 30))
+for j in learning_rate:
+    loc+=1
+    gd=OlsGd(learning_rate=j, verbose=False) 
+    gd._fit(X, Y, reset=True)
+    gd._step(X, Y)
+    plt.subplot(3, 3, loc)
+    plt.plot(np.arange(gd.i+1), gd.mse);
+    plt.xlabel("num_iteration", fontsize=15);
+    plt.ylabel("MSE", fontsize=15);
+    plt.title("learning_rate" +  str(j), fontsize=15)
+ 
 
 ###################################### Exercise 2 - Ridge Linear Regression #######################
 
